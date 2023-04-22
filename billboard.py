@@ -12,6 +12,7 @@ class Billboard:
     def __init__(self, date: str = '2023-04-08'):
         self.date = date
         self.endpoint = f'https://www.billboard.com/charts/hot-100/{self.date}'
+        logging.debug('Billboard class created')
 
     def get_list(self) -> list | None:
         response = requests.get(self.endpoint)
