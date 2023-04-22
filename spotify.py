@@ -1,8 +1,8 @@
-import json
+import logging
 import shelve
+
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-import logging
 
 logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 
@@ -24,8 +24,9 @@ class Spotify:
                              client_id=self.username,
                              redirect_uri=self.uri,
                              client_secret=self.client_secret)
-        logging.debug(f'Token created:\nScope = {self.scope}\nUsername = {self.username}\nClient id = {self.client_id}\n'
-                      f'Redirect uri = {self.uri}\nClient Secret = {self.client_secret}')
+        logging.debug(
+            f'Token created:\nScope = {self.scope}\nUsername = {self.username}\nClient id = {self.client_id}\n'
+            f'Redirect uri = {self.uri}\nClient Secret = {self.client_secret}')
         spotify_object = spotipy.Spotify(auth_manager=token)
         playlist_name = name
         names = spotify_object.user_playlist_create(user=self.username, name=playlist_name, public=public)
